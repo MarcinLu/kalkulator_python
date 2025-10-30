@@ -1,0 +1,7 @@
+*.exe
+*.dll
+*.zip
+.vscode/
+__pycache__/
+*.pyc
+.env/
