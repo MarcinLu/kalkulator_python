@@ -1,36 +1,42 @@
-# main.py - prosty kalkulator
-
-def add(a, b):
+def dodaj(a, b):
     return a + b
 
-def subtract(a, b):
+def odejmij(a, b):
     return a - b
 
-def multiply(a, b):
+def pomnoz(a, b):
     return a * b
 
-def divide(a, b):
-    if b == 0:
-        return "Nie można dzielić przez 0!"
-    return a / b
-
-def main():
-    print("Prosty kalkulator")
-    x = float(input("Podaj pierwszą liczbę: "))
-    y = float(input("Podaj drugą liczbę: "))
-    print("Wybierz operację: +, -, *, /")
-    op = input("Operacja: ")
-
-    if op == "+":
-        print("Wynik:", add(x, y))
-    elif op == "-":
-        print("Wynik:", subtract(x, y))
-    elif op == "*":
-        print("Wynik:", multiply(x, y))
-    elif op == "/":
-        print("Wynik:", divide(x, y))
+def podziel(a, b):
+    if b != 0:
+        return a / b
     else:
-        print("Nieznana operacja!")
+        return "Nie można dzielić przez zero!"
 
-if __name__ == "__main__":
-    main()
+def potega(a, b):
+    return a ** b
+
+print("Prosty kalkulator")
+print("1. Dodawanie")
+print("2. Odejmowanie")
+print("3. Mnożenie")
+print("4. Dzielenie")
+print("5. Potęgowanie")
+
+wybor = input("Wybierz operację (1-5): ")
+
+a = float(input("Podaj pierwszą liczbę: "))
+b = float(input("Podaj drugą liczbę: "))
+
+if wybor == "1":
+    print("Wynik:", dodaj(a, b))
+elif wybor == "2":
+    print("Wynik:", odejmij(a, b))
+elif wybor == "3":
+    print("Wynik:", pomnoz(a, b))
+elif wybor == "4":
+    print("Wynik:", podziel(a, b))
+elif wybor == "5":
+    print("Wynik:", potega(a, b))
+else:
+    print("Nieprawidłowy wybór!")
