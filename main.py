@@ -1,42 +1,78 @@
-def dodaj(a, b):
-    return a + b
+import tkinter as tk
+from tkinter import messagebox
 
-def odejmij(a, b):
-    return a - b
+# Funkcje matematyczne
+def dodaj():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        wynik.set(a + b)
+    except ValueError:
+        messagebox.showerror("Błąd", "Proszę wpisać prawidłowe liczby!")
 
-def pomnoz(a, b):
-    return a * b
+def odejmij():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        wynik.set(a - b)
+    except ValueError:
+        messagebox.showerror("Błąd", "Proszę wpisać prawidłowe liczby!")
 
-def podziel(a, b):
-    if b != 0:
-        return a / b
-    else:
-        return "Nie można dzielić przez zero!"
+def pomnoz():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        wynik.set(a * b)
+    except ValueError:
+        messagebox.showerror("Błąd", "Proszę wpisać prawidłowe liczby!")
 
-def potega(a, b):
-    return a ** b
+def podziel():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        if b == 0:
+            messagebox.showerror("Błąd", "Nie można dzielić przez zero!")
+        else:
+            wynik.set(a / b)
+    except ValueError:
+        messagebox.showerror("Błąd", "Proszę wpisać prawidłowe liczby!")
 
-print("Prosty kalkulator")
-print("1. Dodawanie")
-print("2. Odejmowanie")
-print("3. Mnożenie")
-print("4. Dzielenie")
-print("5. Potęgowanie")
+def potega():
+    try:
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        wynik.set(a ** b)
+    except ValueError:
+        messagebox.showerror("Błąd", "Proszę wpisać prawidłowe liczby!")
+    except OverflowError:
+        messagebox.showerror("Błąd", "Wynik jest zbyt duży!")
 
-wybor = input("Wybierz operację (1-5): ")
+# Tworzenie okna
+root = tk.Tk()
+root.title("Prosty Kalkulator")
 
-a = float(input("Podaj pierwszą liczbę: "))
-b = float(input("Podaj drugą liczbę: "))
+# Zmienne
+wynik = tk.StringVar()
 
-if wybor == "1":
-    print("Wynik:", dodaj(a, b))
-elif wybor == "2":
-    print("Wynik:", odejmij(a, b))
-elif wybor == "3":
-    print("Wynik:", pomnoz(a, b))
-elif wybor == "4":
-    print("Wynik:", podziel(a, b))
-elif wybor == "5":
-    print("Wynik:", potega(a, b))
-else:
-    print("Nieprawidłowy wybór!")
+# Etykiety i pola wejściowe
+tk.Label(root, text="Pierwsza liczba:").grid(row=0, column=0, padx=5, pady=5)
+entry_a = tk.Entry(root)
+entry_a.grid(row=0, column=1, padx=5, pady=5)
+
+tk.Label(root, text="Druga liczba:").grid(row=1, column=0, padx=5, pady=5)
+entry_b = tk.Entry(root)
+entry_b.grid(row=1, column=1, padx=5, pady=5)
+
+# Przycisk do każdej operacji
+tk.Button(root, text="Dodaj", width=10, command=dodaj).grid(row=2, column=0, padx=5, pady=5)
+tk.Button(root, text="Odejmij", width=10, command=odejmij).grid(row=2, column=1, padx=5, pady=5)
+tk.Button(root, text="Mnożenie", width=10, command=pomnoz).grid(row=3, column=0, padx=5, pady=5)
+tk.Button(root, text="Dzielenie", width=10, command=podziel).grid(row=3, column=1, padx=5, pady=5)
+tk.Button(root, text="Potęga", width=10, command=potega).grid(row=4, column=0, columnspan=2, padx=5, pady=5)
+
+# Pole wyświetlające wynik
+tk.Label(root, text="Wynik:").grid(row=5, column=0, padx=5, pady=5)
+tk.Entry(root, textvariable=wynik, state="readonly").grid(row=5, column=1, padx=5, pady=5)
+
+# Uruchomienie pętli głównej
+root.mainloop()
